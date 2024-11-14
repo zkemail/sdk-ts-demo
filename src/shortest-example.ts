@@ -18,7 +18,6 @@ async function main() {
 
   // Generate and wait until proof is generated, can take up to a few minutes
   const proof = await prover.generateProof(eml);
-  // will change tomorrow: the field proof and public will be directly be named proofData, publicData
   const { proofData, publicData } = proof.getProofData();
   console.log("proof: ", proofData);
   console.log("public: ", publicData);
