@@ -1,0 +1,20 @@
+{
+  "pages": {
+    "/layout": [
+      "webpack.js",
+      "main-app.js",
+      "static/css/app/layout.css",
+      "app/layout.js"
+    ],
+    "/page": [
+      "webpack.js",
+      "main-app.js",
+      "app/page.js"
+    ],
+    "/_not-found/page": [
+      "webpack.js",
+      "main-app.js",
+      "app/_not-found/page.js"
+    ]
+  }
+}
