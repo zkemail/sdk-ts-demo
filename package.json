@@ -10,7 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@zk-email/sdk": "^0.0.38"
+    "@zk-email/sdk": "^0.0.68"
   },
   "devDependencies": {
     "ts-node": "^10.9.2",
