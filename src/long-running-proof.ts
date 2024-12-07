@@ -43,10 +43,12 @@ async function main() {
 
   // Get the proof data
   const { proofData, publicData, externalInputs: externalInputsData, publicOutputs } = proof.getProofData();
+  const callData = await proof.createCallData();
   console.log("proof: ", proofData);
   console.log("public data: ", publicData);
-  console.log("external inputs: ", externalInputs);
+  console.log("external inputs: ", externalInputsData);
   console.log("public outputs: ", publicOutputs);
+  console.log("callData: ", callData);
   console.log("verifier address: ", blueprint?.props.verifierContract?.address);
 }
 
