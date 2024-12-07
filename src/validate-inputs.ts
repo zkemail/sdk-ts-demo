@@ -2,11 +2,11 @@ import zkeSDK, { parseEmail, testBlueprint } from "@zk-email/sdk";
 import fs from "fs/promises";
 
 // Copy slug from UI homepage
-const blueprintSlug = "Bisht13/SuccinctZKResidencyInvite@v1"
+const blueprintSlug = "wryonik/twitter@v2"
 
 async function main() {
   // Get eml
-  const eml = (await fs.readFile("emls/residency.eml")).toString();
+  const eml = (await fs.readFile("emls/twitter-password-reset.eml")).toString();
 
   // Check if an email is valid - Use parsedEmail to get specific information
   try {
