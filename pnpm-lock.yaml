@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@zk-email/sdk':
-        specifier: ^0.0.72
-        version: 0.0.72(typescript@5.6.3)
+        specifier: ^0.0.73
+        version: 0.0.73(typescript@5.6.3)
     devDependencies:
       '@types/node':
         specifier: ^20.0.0
@@ -93,8 +93,8 @@ packages:
   '@types/node@22.7.5':
     resolution: {integrity: sha512-jML7s2NAzMWc//QSJ1a3prpk78cOPchGvXJsC3C6R6PSMoooztvRVQEz89gmBTBY1SPMaqo5teB4uNHPdetShQ==}
 
-  '@zk-email/sdk@0.0.72':
-    resolution: {integrity: sha512-1BR9B2ltvwAJ+N8RnFQk7JULSNaQwK+e3KacfeWL/NXDdiKigrNaId4X/dsdy/O0QA2d7RdH++j0N3HNVeCOAQ==}
+  '@zk-email/sdk@0.0.73':
+    resolution: {integrity: sha512-uZGlT55gIRS1TbB34391wz02+AtnD7EROrvuRAGOTaDJJHmFNPBCR+zRMCo023nSLMrK9a6jPYjRM4zsKv8zTg==}
     peerDependencies:
       typescript: ^5.0.0
 
@@ -285,7 +285,7 @@ snapshots:
     dependencies:
       undici-types: 6.19.8
 
-  '@zk-email/sdk@0.0.72(typescript@5.6.3)':
+  '@zk-email/sdk@0.0.73(typescript@5.6.3)':
     dependencies:
       '@dimidumo/relayer-utils': 0.4.47
       ethers: 6.13.4

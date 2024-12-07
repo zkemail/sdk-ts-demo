@@ -26,10 +26,11 @@ async function main() {
 
   // Generate and wait until proof is generated, can take up to a few minutes
   const proof = await prover.generateProof(eml, externalInputs);
-  const { proofData, publicData } = proof.getProofData();
+    const { proofData, publicData, externalInputs: externalInputsData, publicOutputs } = proof.getProofData();
   console.log('proof: ', proofData);
   console.log('public: ', publicData);
-  console.log('external inputs: ', externalInputs);
+  console.log('external inputs: ', externalInputsData);
+  console.log('public outputs: ', publicOutputs);
   console.log('verifier address: ', blueprint?.props.verifierContract?.address);
 }
 

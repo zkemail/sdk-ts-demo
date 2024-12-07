@@ -42,10 +42,11 @@ async function main() {
   }
 
   // Get the proof data
-  const { proofData, publicData } = proof.getProofData();
+  const { proofData, publicData, externalInputs: externalInputsData, publicOutputs } = proof.getProofData();
   console.log("proof: ", proofData);
   console.log("public data: ", publicData);
   console.log("external inputs: ", externalInputs);
+  console.log("public outputs: ", publicOutputs);
   console.log("verifier address: ", blueprint?.props.verifierContract?.address);
 }
 
