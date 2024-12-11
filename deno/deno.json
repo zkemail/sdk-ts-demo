@@ -1,0 +1,9 @@
+{
+  "tasks": {
+    "dev": "deno run --watch src/validate-input.ts"
+  },
+  "imports": {
+    "@std/assert": "jsr:@std/assert@1",
+    "@zk-email/sdk": "npm:@zk-email/sdk@^0.0.83"
+  }
+}
