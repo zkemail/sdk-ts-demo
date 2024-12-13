@@ -23,8 +23,9 @@ async function main() {
       value: "0x0000000000000000000000000000000000000000",
     },
   ];
-
+  
   // Generate and wait until proof is generated, can take up to a few minutes
+  // remove `externalInputs` if the blueprint you are using does not require external inputs
   const proof = await prover.generateProof(eml, externalInputs);
   const {
     proofData,

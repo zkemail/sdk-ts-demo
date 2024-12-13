@@ -24,6 +24,7 @@ async function main() {
   ];
 
   // Generate a proof request and don't wait till it is done.
+    // remove `externalInputs` if the blueprint you are using does not require external inputs
   const proof = await prover.generateProofRequest(eml, externalInputs);
 
   // Check the status of the proof
