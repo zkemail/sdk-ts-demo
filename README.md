@@ -1,12 +1,29 @@
 # sdk-ts-demo
+
 Demo of using the typescript zk-email sdk
 
-## Run a demo file
+## Run a node_js demo script
 
-`pnpm i`
-`pnpm start src/shortest-example.ts`
+This also works using `bun`.
 
-## IMPORTANT NOTE
+```bash
+cd node_js
+pnpm i
+pnpm start src/shortest-example.ts
+```
 
-The sdk works in the browser and in Node, but NOT on Next.js server side yet.
-This is due wasm initialization. We will fix this in the near future.
+## Run NextJS demo
+
+```bash
+cd nextjs
+pnpm i
+pnpm run dev
+```
+
+## Run vite vanilla js demo
+
+```bash
+cd vite
+pnpm i
+pnpm run dev
+```

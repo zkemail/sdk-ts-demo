@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@zk-email/sdk": "^0.0.55",
+    "@zk-email/sdk": "^0.0.88",
     "next": "15.0.3",
     "next-transpile-modules": "^10.0.1",
     "react": "19.0.0-rc-66855b96-20241106",

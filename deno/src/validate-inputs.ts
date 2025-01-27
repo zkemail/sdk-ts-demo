@@ -2,7 +2,7 @@ import zkeSDK, { parseEmail, testBlueprint } from '@zk-email/sdk';
 import fs from 'node:fs/promises';
 
 // Copy slug from UI homepage
-const blueprintSlug = 'Bisht13/SuccinctZKResidencyInvite@v1';
+const blueprintSlug = 'Bisht13/SuccinctZKResidencyInvite@v2';
 
 async function main() {
   // Get eml

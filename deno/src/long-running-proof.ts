@@ -2,7 +2,7 @@ import fs from 'node:fs/promises';
 import zkeSDK, { ProofStatus } from '@zk-email/sdk';
 
 // Copy slug from UI homepage
-const blueprintSlug = 'Bisht13/SuccinctZKResidencyInvite@v1';
+const blueprintSlug = 'Bisht13/SuccinctZKResidencyInvite@v2';
 
 async function main() {
   const sdk = zkeSDK();
