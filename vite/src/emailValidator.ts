@@ -1,7 +1,10 @@
-import { parseEmail } from "@zk-email/sdk";
+import zkeSdk from '@zk-email/sdk';
+
+const blueprintSlug = 'Bisht13/SuccinctZKResidencyInvite@v2';
 
 export function setupEmailValidator(element: HTMLElement) {
-  let emailContent = "";
+  const sdk = zkeSdk();
+  let emailContent = '';
 
   const handleFileUpload = async (event: Event) => {
     const target = event.target as HTMLInputElement;
@@ -16,14 +19,55 @@ export function setupEmailValidator(element: HTMLElement) {
     reader.readAsText(file);
   };
 
-  const validateEmail = async () => {
-    try {
-      const parsedEmail = await parseEmail(emailContent);
-      console.log("parsedEmail: ", parsedEmail);
-    } catch (err) {
-      console.error("Failed to parse email: ", err);
+  const proveInBrowser = async () => {
+    if (!emailContent) {
+      alert('Please provide an email first');
+      return;
     }
-  }
+    try {
+      // Fetch blueprint
+      const blueprint = await sdk.getBlueprint(blueprintSlug);
+
+      // Initialize local prover
+      const prover = blueprint.createProver({ isLocal: true });
+
+      // Create proof passing email content
+      const proof = await prover.generateProof(emailContent);
+
+      console.log('Got proof: ', proof);
+
+      const verification = await blueprint.verifyProofOnChain(proof);
+
+      console.log('Proof was verified: ', verification);
+    } catch (err) {
+      console.error('Could not parse email in frontend: ', err);
+    }
+  };
+
+  const proveOnServer = async () => {
+    if (!emailContent) {
+      alert('Please provide an email first');
+      return;
+    }
+    try {
+      // Fetch blueprint
+      const blueprint = await sdk.getBlueprint(blueprintSlug);
+
+      // Initialize local prover
+      const prover = blueprint.createProver();
+
+      // Create proof passing email content
+      const proof = await prover.generateProof(emailContent);
+
+      console.log('Got proof: ', proof);
+
+      const verification = await blueprint.verifyProofOnChain(proof);
+
+      console.log('Proof was verified: ', verification);
+    } catch (err) {
+      console.error('Could not parse email in frontend: ', err);
+    }
+  };
 
   // Select the input element specifically and use 'change' event
   const fileInput = element.querySelector('input[type="file"]');
@@ -31,8 +75,14 @@ export function setupEmailValidator(element: HTMLElement) {
     fileInput.addEventListener('change', handleFileUpload);
   }
 
-  const validateButton = element.querySelector('button');
-  if (validateButton) {
-    validateButton.addEventListener('click', validateEmail);
+  const proveInBrowserButton = element.querySelector(
+    'button.proof-client-side',
+  );
+  const proveOnServerButton = element.querySelector('button.proof-server-side');
+  if (proveInBrowserButton) {
+    proveInBrowserButton.addEventListener('click', proveInBrowser);
+  }
+  if (proveOnServerButton) {
+    proveOnServerButton.addEventListener('click', proveOnServer);
   }
 }

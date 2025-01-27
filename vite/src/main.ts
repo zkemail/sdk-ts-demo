@@ -1,5 +1,5 @@
-import './style.css'
-import { setupEmailValidator } from './emailValidator.ts'
+import './style.css';
+import { setupEmailValidator } from './emailValidator.ts';
 
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
   <div>
@@ -9,10 +9,11 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
         type="file"
       />
       <div className="flex mt-5">
-        <button class="validate-client-side">Validate Client Side</button>
+        <button class="proof-client-side">Generate Proof in Browser</button>
+        <button class="proof-server-side">Generate Proof Remotely</button>
       </div>
     </div>
   </div>
-`
+`;
 
-setupEmailValidator(document.querySelector<HTMLElement>('#email-validator')!)
+setupEmailValidator(document.querySelector<HTMLElement>('#email-validator')!);

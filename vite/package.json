@@ -13,7 +13,7 @@
     "vite": "^6.0.1"
   },
   "dependencies": {
-    "@zk-email/sdk": "^0.0.55",
+    "@zk-email/sdk": "^0.0.88",
     "buffer": "^6.0.3"
   }
 }
