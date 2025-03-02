@@ -8,8 +8,8 @@ This also works using `bun`.
 
 ```bash
 cd node_js
-pnpm i
-pnpm start src/shortest-example.ts
+bun i
+bun src/shortest-example.ts
 ```
 
 ## Run NextJS demo
