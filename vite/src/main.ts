@@ -1,7 +1,10 @@
-import './style.css';
-import { setupEmailValidator } from './emailValidator.ts';
+import "./style.css";
+import { setupEmailValidator } from "./emailValidator.ts";
+import { Buffer } from "buffer/";
 
-document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
+(window as any).Buffer = Buffer;
+
+document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
   <div>
     <h1>ZK Email Vite Test</h1>
     <div id="email-validator">
@@ -16,4 +19,4 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
   </div>
 `;
 
-setupEmailValidator(document.querySelector<HTMLElement>('#email-validator')!);
+setupEmailValidator(document.querySelector<HTMLElement>("#email-validator")!);

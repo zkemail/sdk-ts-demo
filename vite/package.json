@@ -10,10 +10,12 @@
   },
   "devDependencies": {
     "typescript": "~5.6.2",
-    "vite": "^6.0.1"
+    "vite": "^6.0.1",
+    "@esbuild-plugins/node-globals-polyfill": "^0.2.3",
+    "@esbuild-plugins/node-modules-polyfill": "^0.2.2"
   },
   "dependencies": {
-    "@zk-email/sdk": "^0.0.88",
+    "@zk-email/sdk": "^0.0.132",
     "buffer": "^6.0.3"
   }
 }
