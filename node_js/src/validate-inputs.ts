@@ -2,7 +2,7 @@ import zkeSDK, { parseEmail, testBlueprint } from "@zk-email/sdk";
 import fs from "fs/promises";
 
 // Copy slug from UI homepage
-const blueprintSlug = "Bisht13/SuccinctZKResidencyInvite@v1"
+const blueprintSlug = "DimiDumo/SuccinctZKResidencyInvite@v3";
 
 async function main() {
   // Get eml
@@ -13,7 +13,7 @@ async function main() {
     const parsedEmail = await parseEmail(eml);
     console.log("email header: ", parsedEmail.headers);
   } catch (err) {
-    console.error("Failed to parse email: ", err)
+    console.error("Failed to parse email: ", err);
   }
 
   const sdk = zkeSDK();
@@ -28,7 +28,7 @@ async function main() {
     const outputs = await testBlueprint(eml, blueprint.props, false);
     console.log(`outputs from '${blueprint.props.title}' blueprint:`, outputs);
   } catch (err) {
-    console.error("Got an error while testing the blueprint: ", err)
+    console.error("Got an error while testing the blueprint: ", err);
   }
 }
 

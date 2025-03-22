@@ -1,8 +1,8 @@
-import fs from 'node:fs/promises';
-import zkeSDK, { ProofStatus } from '@zk-email/sdk';
+import fs from "node:fs/promises";
+import zkeSDK, { ProofStatus } from "@zk-email/sdk";
 
 // Copy slug from UI homepage
-const blueprintSlug = 'Bisht13/SuccinctZKResidencyInvite@v2';
+const blueprintSlug = "DimiDumo/SuccinctZKResidencyInvite@v3";
 
 async function main() {
   const sdk = zkeSDK();
@@ -14,7 +14,7 @@ async function main() {
   const prover = blueprint.createProver();
 
   // Get eml
-  const eml = (await fs.readFile('../emls/residency.eml')).toString();
+  const eml = (await fs.readFile("../emls/residency.eml")).toString();
 
   // Generate a proof request and don't wait till it is done.
   const proof = await prover.generateProofRequest(eml);
@@ -24,20 +24,20 @@ async function main() {
   let status = await proof.checkStatus();
   // Should be InProgress
   console.log(
-    'Initial Status is in progress: ',
-    status === ProofStatus.InProgress,
+    "Initial Status is in progress: ",
+    status === ProofStatus.InProgress
   );
 
   // You can now either manually use checkStatus in interval or use waitForCompletion
   status = await proof.waitForCompletion();
   if (status === ProofStatus.Failed) {
-    throw new Error('Failed to generate proof');
+    throw new Error("Failed to generate proof");
   }
 
   // Get the proof data
   const { proofData, publicData } = proof.getProofData();
-  console.log('proof: ', proofData);
-  console.log('public data: ', publicData);
+  console.log("proof: ", proofData);
+  console.log("public data: ", publicData);
 }
 
 main();

@@ -1,19 +1,19 @@
-'use client';
-import zkeSdk, { parseEmail, Proof } from '@zk-email/sdk';
-import { useState } from 'react';
+"use client";
+import zkeSdk, { Proof } from "@zk-email/sdk";
+import { useState } from "react";
 
-const blueprintSlug = 'Bisht13/SuccinctZKResidencyInvite@v2';
+const blueprintSlug = "DimiDumo/SuccinctZKResidencyInvite@v3";
 
 export default function Home() {
   const sdk = zkeSdk();
 
-  const [fileContent, setFileContent] = useState('');
+  const [fileContent, setFileContent] = useState("");
   const [isLoadingClient, setIsLoadingClient] = useState(false);
   const [isLoadingServer, setIsLoadingServer] = useState(false);
   const [proof, setProof] = useState<Proof | null>(null);
 
   const handleFileUpload = async (
-    event: React.ChangeEvent<HTMLInputElement>,
+    event: React.ChangeEvent<HTMLInputElement>
   ) => {
     const file = event.target.files?.[0];
     if (!file) return;
@@ -28,7 +28,7 @@ export default function Home() {
 
   const handleEmailClient = async () => {
     if (!fileContent) {
-      alert('Please provide an email first');
+      alert("Please provide an email first");
       return;
     }
     setProof(null);
@@ -43,21 +43,21 @@ export default function Home() {
       // Create proof passing email content
       const proof = await prover.generateProof(fileContent);
 
-      console.log('Got proof: ', proof);
+      console.log("Got proof: ", proof);
       setProof(proof);
 
       const verification = await blueprint.verifyProofOnChain(proof);
 
-      console.log('Proof was verified: ', verification);
+      console.log("Proof was verified: ", verification);
     } catch (err) {
-      console.error('Could not parse email in frontend: ', err);
+      console.error("Could not parse email in frontend: ", err);
     }
     setIsLoadingClient(false);
   };
 
   const handleEmailServer = async () => {
     if (!fileContent) {
-      alert('Please provide an email first');
+      alert("Please provide an email first");
       return;
     }
     setProof(null);
@@ -72,14 +72,14 @@ export default function Home() {
       // Create proof passing email content
       const proof = await prover.generateProof(fileContent);
 
-      console.log('Got proof: ', proof);
+      console.log("Got proof: ", proof);
       setProof(proof);
 
       const verification = await blueprint.verifyProofOnChain(proof);
 
-      console.log('Proof was verified: ', verification);
+      console.log("Proof was verified: ", verification);
     } catch (err) {
-      console.error('Could not parse email in frontend: ', err);
+      console.error("Could not parse email in frontend: ", err);
     }
     setIsLoadingServer(false);
   };
@@ -93,7 +93,7 @@ export default function Home() {
         isLocal: proof.props.isLocal,
       },
       null,
-      4,
+      4
     );
   }
 
@@ -118,13 +118,13 @@ export default function Home() {
             onClick={handleEmailClient}
             disabled={isLoadingClient}
           >
-            {isLoadingClient ? 'Loading...' : 'Generate Proof in Browser'}
+            {isLoadingClient ? "Loading..." : "Generate Proof in Browser"}
           </button>
           <button
             className="mr-5 rounded-full bg-violet-50 text-violet-700 p-4 text-sm font-semibold"
             onClick={handleEmailServer}
           >
-            {isLoadingServer ? 'Loading...' : 'Generate Proof Remotely'}
+            {isLoadingServer ? "Loading..." : "Generate Proof Remotely"}
           </button>
         </div>
         {isLoadingClient && (

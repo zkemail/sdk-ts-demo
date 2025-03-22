@@ -1,19 +1,19 @@
-import zkeSDK, { parseEmail, testBlueprint } from '@zk-email/sdk';
-import fs from 'node:fs/promises';
+import zkeSDK, { parseEmail, testBlueprint } from "@zk-email/sdk";
+import fs from "node:fs/promises";
 
 // Copy slug from UI homepage
-const blueprintSlug = 'Bisht13/SuccinctZKResidencyInvite@v2';
+const blueprintSlug = "DimiDumo/SuccinctZKResidencyInvite@v3";
 
 async function main() {
   // Get eml
-  const eml = (await fs.readFile('../emls/residency.eml')).toString();
+  const eml = (await fs.readFile("../emls/residency.eml")).toString();
 
   // Check if an email is valid - Use parsedEmail to get specific information
   try {
     const parsedEmail = await parseEmail(eml);
-    console.log('email header: ', parsedEmail.headers);
+    console.log("email header: ", parsedEmail.headers);
   } catch (err) {
-    console.error('Failed to parse email: ', err);
+    console.error("Failed to parse email: ", err);
   }
 
   const sdk = zkeSDK();
@@ -28,7 +28,7 @@ async function main() {
     const outputs = await testBlueprint(eml, blueprint.props, false);
     console.log(`outputs from '${blueprint.props.title}' blueprint:`, outputs);
   } catch (err) {
-    console.error('Got an error while testing the blueprint: ', err);
+    console.error("Got an error while testing the blueprint: ", err);
   }
 }
 

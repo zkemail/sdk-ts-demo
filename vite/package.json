@@ -15,7 +15,7 @@
     "@esbuild-plugins/node-modules-polyfill": "^0.2.2"
   },
   "dependencies": {
-    "@zk-email/sdk": "^0.0.132",
+    "@zk-email/sdk": "^0.0.133",
     "buffer": "^6.0.3"
   }
 }
