@@ -3,14 +3,17 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "dev": "next dev --turbopack",
+    "build": "next build --turbopack",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
-    "@zk-email/sdk": "^0.0.133",
-    "next": "15.0.3",
+    "@aztec/bb.js": "0.82.2",
+    "@noir-lang/noir_js": "1.0.0-beta.6",
+    "@noir-lang/noirc_abi": "1.0.0-beta.6",
+    "@zk-email/sdk": "1.2.0-22",
+    "next": "^15.3.2",
     "next-transpile-modules": "^10.0.1",
     "react": "19.0.0-rc-66855b96-20241106",
     "react-dom": "19.0.0-rc-66855b96-20241106"

@@ -1,0 +1,16 @@
+{
+  "name": "zkemail-sdk-deno-demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/validate-inputs.ts",
+  "scripts": {
+    "dev": "deno run --watch src/validate-inputs.ts"
+  },
+  "dependencies": {
+    "@zk-email/sdk": "1.2.0-22"
+  },
+  "devDependencies": {
+    "tsx": "^4.0.0",
+    "typescript": "^5.0.0"
+  }
+}

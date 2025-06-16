@@ -2,7 +2,7 @@ import zkeSDK, { parseEmail, testBlueprint } from "@zk-email/sdk";
 import fs from "fs/promises";
 
 // Copy slug from UI homepage
-const blueprintSlug = "DimiDumo/SuccinctZKResidencyInvite@v3";
+const blueprintSlug = "DimiDumo/residency_sp1_noir@v1";
 
 async function main() {
   // Get eml
@@ -16,7 +16,7 @@ async function main() {
     console.error("Failed to parse email: ", err);
   }
 
-  const sdk = zkeSDK();
+  const sdk = zkeSDK({ baseUrl: "https://staging-conductor.zk.email" });
 
   // Get an instance of Blueprint
   const blueprint = await sdk.getBlueprint(blueprintSlug);
@@ -32,4 +32,4 @@ async function main() {
   }
 }
 
-main();
+main().then(() => process.exit(0)).catch(() => process.exit(1));

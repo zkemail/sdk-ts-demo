@@ -27,17 +27,16 @@ This project requires Node.js version 20 or above. We recommend using `nvm` (Nod
 ## Project Demos
 
 ### Node.js Demo
-This demo requires [bun](https://bun.sh) to run:
 
 ```bash
 # Navigate to the Node.js demo directory
 cd node_js
 
 # Install dependencies
-bun i
+pnpm i
 
 # Run the demo
-bun src/shortest-example.ts
+pnpm start src/shortest-example.ts
 ```
 
 ### Deno Demo
@@ -46,6 +45,9 @@ Make sure you have [Deno](https://deno.land) installed.
 ```bash
 # Navigate to the Deno demo directory
 cd deno
+
+# Due to security policies we have to use npm or similar to install the dependencies
+npm i
 
 # Run the development server
 deno task dev
@@ -78,11 +80,6 @@ pnpm run dev
 ## Additional Notes
 - Each demo is contained in its own directory with its specific dependencies
 - Make sure to install the required package managers before running the respective demos:
-  
-  Install bun:
-  ```bash
-  curl -fsSL https://bun.sh/install | bash
-  ```
   
   Install pnpm:
   ```bash

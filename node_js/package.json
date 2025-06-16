@@ -4,17 +4,21 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node --loader ts-node/esm"
+    "start": "tsx"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@zk-email/sdk": "^0.0.133"
+    "@aztec/bb.js": "^0.87.8",
+    "@noir-lang/acvm_js": "1.0.0-beta.6",
+    "@noir-lang/noir_js": "1.0.0-beta.6",
+    "@noir-lang/noirc_abi": "1.0.0-beta.6",
+    "@zk-email/sdk": "1.2.0-22"
   },
   "devDependencies": {
-    "ts-node": "^10.9.2",
     "@types/node": "^20.0.0",
+    "tsx": "^4.20.3",
     "typescript": "^5.0.0"
   },
   "type": "module"
