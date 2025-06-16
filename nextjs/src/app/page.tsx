@@ -1,11 +1,14 @@
 "use client";
 import zkeSdk, { Proof } from "@zk-email/sdk";
+// To optionally verify if an email is valid first
+// import { parseEmail } from "@zk-email/sdk";
 import { useState } from "react";
+import { initNoirWasm } from "@zk-email/sdk/initNoirWasm";
 
-const blueprintSlug = "DimiDumo/SuccinctZKResidencyInvite@v3";
+const blueprintSlug = "DimiDumo/residency_sp1_noir@v2";
 
 export default function Home() {
-  const sdk = zkeSdk();
+  const sdk = zkeSdk({ baseUrl: "https://staging-conductor.zk.email" });
 
   const [fileContent, setFileContent] = useState("");
   const [isLoadingClient, setIsLoadingClient] = useState(false);
@@ -17,6 +20,14 @@ export default function Home() {
   ) => {
     const file = event.target.files?.[0];
     if (!file) return;
+    
+    // You can optionally verify if an email is valid for a blueprint by parsing it first
+    // try {
+    //   const parsedEmail = await parseEmail(eml);
+    // } catch (err) {
+    //   console.error("Email is invalid", err);
+    //   throw err;
+    // }
 
     const reader = new FileReader();
     reader.onload = (e) => {
@@ -39,16 +50,38 @@ export default function Home() {
 
       // Initialize local prover
       const prover = blueprint.createProver({ isLocal: true });
+      
+      // External inputs are only required if defined in the blueprint
+      const externalInputs = [{ name: "eth_address", value: "0x0" }];
+      
+      // Noir must be initialized seperately
+      const noirWasm = await initNoirWasm();
+      const options = { noirWasm };
 
       // Create proof passing email content
-      const proof = await prover.generateProof(fileContent);
+      const proof = await prover.generateProof(fileContent, externalInputs, options);
 
-      console.log("Got proof: ", proof);
       setProof(proof);
 
-      const verification = await blueprint.verifyProofOnChain(proof);
+      const verified = await proof.verify(options);
 
-      console.log("Proof was verified: ", verification);
+      console.log("Proof was verified client side: ", verified);
+      
+      console.log("Verifying proof server side");
+      // Optional: Verify a proof server side that was created client side
+      const response = await fetch('/api/verify-noir', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          proof: proof.packProof()
+        })
+      });
+      
+      const result = await response.json();
+      console.log("proof verified server side: ", result);
+      
     } catch (err) {
       console.error("Could not parse email in frontend: ", err);
     }
@@ -68,16 +101,20 @@ export default function Home() {
 
       // Initialize remote prover
       const prover = blueprint.createProver();
+      
+      // External inputs are only required if defined in the blueprint
+      const externalInputs = [{ name: "eth_address", value: "0x0" }];
 
       // Create proof passing email content
-      const proof = await prover.generateProof(fileContent);
+      const proof = await prover.generateProof(fileContent, externalInputs);
 
       console.log("Got proof: ", proof);
       setProof(proof);
 
-      const verification = await blueprint.verifyProofOnChain(proof);
+      const verified = await proof.verify();
 
-      console.log("Proof was verified: ", verification);
+      console.log("Proof was verified: ", verified);
+      
     } catch (err) {
       console.error("Could not parse email in frontend: ", err);
     }
@@ -118,7 +155,7 @@ export default function Home() {
             onClick={handleEmailClient}
             disabled={isLoadingClient}
           >
-            {isLoadingClient ? "Loading..." : "Generate Proof in Browser"}
+            {isLoadingClient ? "Proving with Noir..." : "Generate Proof in Browser"}
           </button>
           <button
             className="mr-5 rounded-full bg-violet-50 text-violet-700 p-4 text-sm font-semibold"
@@ -129,11 +166,12 @@ export default function Home() {
         </div>
         {isLoadingClient && (
           <div className="mt-4 text-sm text-gray-600">
-            Please wait, this can take up to 10 minutes...
+            Please wait, this can take up to 5 minutes...
           </div>
         )}
         {proof && (
           <div className="mt-8 p-4 bg-gray-50 rounded-lg overflow-auto max-w-2xl">
+            <h3 className="font-semibold mb-2">Generated Proof:</h3>
             <pre className="text-sm">{formatProofAsStr(proof)}</pre>
           </div>
         )}

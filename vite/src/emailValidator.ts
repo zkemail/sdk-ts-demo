@@ -1,9 +1,10 @@
 import zkeSdk from "@zk-email/sdk";
+import {initNoirWasm} from "@zk-email/sdk/initNoirWasm";
 
-const blueprintSlug = "DimiDumo/SuccinctZKResidencyInvite@v3";
+const blueprintSlug = "DimiDumo/residency_sp1_noir@v2";
+const sdk = zkeSdk({ baseUrl: "https://staging-conductor.zk.email" });
 
 export function setupEmailValidator(element: HTMLElement) {
-  const sdk = zkeSdk();
   let emailContent = "";
 
   const handleFileUpload = async (event: Event) => {
@@ -27,18 +28,23 @@ export function setupEmailValidator(element: HTMLElement) {
     try {
       // Fetch blueprint
       const blueprint = await sdk.getBlueprint(blueprintSlug);
-
+      
       // Initialize local prover
       const prover = blueprint.createProver({ isLocal: true });
 
-      // Create proof passing email content
-      const proof = await prover.generateProof(emailContent);
+      // Noir must be initialized seperately
+      const noirWasm = await initNoirWasm();
+      const options = { noirWasm };
+      
+      // External inputs are only required if defined in the blueprint
+      const externalInputs = [{ name: "eth_address", value: "0x0" }];
+      
+      console.log("Generating proof with Noir");
+      const proof = await prover.generateProof(emailContent, externalInputs, options);
+      console.log("Got proof");
 
-      console.log("Got proof: ", proof);
-
-      const verification = await blueprint.verifyProofOnChain(proof);
-
-      console.log("Proof was verified: ", verification);
+      const verified = await proof.verify(options);
+      console.log("Proof was verified: ", verified);
     } catch (err) {
       console.error("Could not parse email in frontend: ", err);
     }
@@ -55,15 +61,16 @@ export function setupEmailValidator(element: HTMLElement) {
 
       // Initialize local prover
       const prover = blueprint.createProver();
+      
+      // External inputs are only required if defined in the blueprint
+      const externalInputs = [{ name: "eth_address", value: "0x0" }];
 
-      // Create proof passing email content
-      const proof = await prover.generateProof(emailContent);
-
+      console.log("Generating proof with SP1");
+      const proof = await prover.generateProof(emailContent, externalInputs);
       console.log("Got proof: ", proof);
 
-      const verification = await blueprint.verifyProofOnChain(proof);
-
-      console.log("Proof was verified: ", verification);
+      const verified = await proof.verify();
+      console.log("Proof was verified: ", verified);
     } catch (err) {
       console.error("Could not parse email in frontend: ", err);
     }
