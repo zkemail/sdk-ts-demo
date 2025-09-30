@@ -1,9 +1,9 @@
-import zkeSdk from "@zk-email/sdk";
+import { initZkEmailSdk } from "@zk-email/sdk";
 
 const blueprintSlug = "DimiDumo/SuccinctZKResidencyInvite@v3";
 
 export function setupEmailValidator(element: HTMLElement) {
-  const sdk = zkeSdk();
+  const sdk = initZkEmailSdk();
   let emailContent = "";
 
   const handleFileUpload = async (event: Event) => {
@@ -29,7 +29,7 @@ export function setupEmailValidator(element: HTMLElement) {
       const blueprint = await sdk.getBlueprint(blueprintSlug);
 
       // Initialize local prover
-      const prover = blueprint.createProver({ isLocal: true });
+      const prover = blueprint.createProver();
 
       // Create proof passing email content
       const proof = await prover.generateProof(emailContent);
