@@ -1,11 +1,11 @@
 import fs from "fs/promises";
-import zkeSDK, { ProofStatus } from "@zk-email/sdk";
+import { initZkEmailSdk } from "@zk-email/sdk";
 
 // Copy slug from UI homepage
 const blueprintSlug = "DimiDumo/SuccinctZKResidencyInvite@v3";
 
 async function main() {
-  const sdk = zkeSDK();
+  const sdk = initZkEmailSdk();
 
   // Get an instance of Blueprint
   const blueprint = await sdk.getBlueprint(blueprintSlug);
@@ -23,16 +23,10 @@ async function main() {
   // It will be InProgress after starting
   let status = await proof.checkStatus();
   // Should be InProgress
-  console.log(
-    "Initial Status is in progress: ",
-    status === ProofStatus.InProgress
-  );
+  console.log("Initial Status is in progress: ", status);
 
   // You can now either manually use checkStatus in interval or use waitForCompletion
   status = await proof.waitForCompletion();
-  if (status === ProofStatus.Failed) {
-    throw new Error("Failed to generate proof");
-  }
 
   // Get the proof data
   const { proofData, publicData } = proof.getProofData();
