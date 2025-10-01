@@ -1,11 +1,11 @@
 "use client";
-import zkeSdk, { Proof } from "@zk-email/sdk";
+import {initZkEmailSdk,  Proof } from "@zk-email/sdk";
 import { useState } from "react";
 
 const blueprintSlug = "DimiDumo/SuccinctZKResidencyInvite@v3";
 
 export default function Home() {
-  const sdk = zkeSdk();
+  const sdk = initZkEmailSdk();
 
   const [fileContent, setFileContent] = useState("");
   const [isLoadingClient, setIsLoadingClient] = useState(false);
@@ -38,7 +38,7 @@ export default function Home() {
       const blueprint = await sdk.getBlueprint(blueprintSlug);
 
       // Initialize local prover
-      const prover = blueprint.createProver({ isLocal: true });
+      const prover = blueprint.createProver();
 
       // Create proof passing email content
       const proof = await prover.generateProof(fileContent);
@@ -133,7 +133,7 @@ export default function Home() {
           </div>
         )}
         {proof && (
-          <div className="mt-8 p-4 bg-gray-50 rounded-lg overflow-auto max-w-2xl">
+          <div className="mt-8 p-4 rounded-lg overflow-auto max-w-2xl">
             <pre className="text-sm">{formatProofAsStr(proof)}</pre>
           </div>
         )}
