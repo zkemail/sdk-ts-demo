@@ -3,7 +3,6 @@
     "dev": "deno run --watch src/validate-inputs.ts"
   },
   "imports": {
-    "@std/assert": "jsr:@std/assert@1",
-    "@zk-email/sdk": "npm:@zk-email/sdk@^0.0.133"
+    "@std/assert": "jsr:@std/assert@1"
   }
 }
