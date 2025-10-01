@@ -10,11 +10,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@zk-email/sdk": "^0.0.133"
+    "@zk-email/sdk": "^2.0.10"
   },
   "devDependencies": {
-    "ts-node": "^10.9.2",
     "@types/node": "^20.0.0",
+    "ts-node": "^10.9.2",
     "typescript": "^5.0.0"
   },
   "type": "module"
