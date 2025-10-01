@@ -1,4 +1,4 @@
-import zkeSDK, { parseEmail, testBlueprint } from "@zk-email/sdk";
+import { initZkEmailSdk, parseEmail, testBlueprint } from "@zk-email/sdk";
 import fs from "fs/promises";
 
 // Copy slug from UI homepage
@@ -16,7 +16,7 @@ async function main() {
     console.error("Failed to parse email: ", err);
   }
 
-  const sdk = zkeSDK();
+  const sdk = initZkEmailSdk();
 
   // Get an instance of Blueprint
   const blueprint = await sdk.getBlueprint(blueprintSlug);

@@ -1,11 +1,11 @@
 import fs from "fs/promises";
-import zkeSDK, { ProofStatus } from "@zk-email/sdk";
+import { initZkEmailSdk, ProofStatus } from "@zk-email/sdk";
 
 // Copy slug from UI homepage
 const blueprintSlug = "DimiDumo/SuccinctZKResidencyInvite@v3";
 
 async function main() {
-  const sdk = zkeSDK();
+  const sdk = initZkEmailSdk();
 
   // Get an instance of Blueprint
   const blueprint = await sdk.getBlueprint(blueprintSlug);
