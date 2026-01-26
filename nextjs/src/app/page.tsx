@@ -1,11 +1,11 @@
 "use client";
-import zkeSdk, { Proof } from "@zk-email/sdk";
+import { initZkEmailSdk, Proof } from "@zk-email/sdk";
 import { useState } from "react";
 
-const blueprintSlug = "DimiDumo/SuccinctZKResidencyInvite@v3";
+const blueprintSlug = "rutefig/gmail@v2";
 
 export default function Home() {
-  const sdk = zkeSdk();
+  const sdk = initZkEmailSdk();
 
   const [fileContent, setFileContent] = useState("");
   const [isLoadingClient, setIsLoadingClient] = useState(false);

@@ -62,3 +62,9 @@ coverage/
 *.tgz
 *.gz
 *.zip
+
+# Ignore EML files directory
+emls/
+
+# Ignore macOS system files
+.DS_Store

@@ -24,6 +24,13 @@ This project requires Node.js version 20 or above. We recommend using `nvm` (Nod
    nvm use 20
    ```
 
+## Setup
+
+Before running any demo, you need to:
+
+1. **Add your EML file**: Place your `.eml` email file in the `emls/` directory at the root of this project
+2. **Update the file path**: In each project you want to run, update the EML file path to point to your email file (e.g., `../emls/your-email.eml`)
+
 ## Project Demos
 
 ### Node.js Demo
@@ -73,6 +80,27 @@ pnpm i
 
 # Start the development server
 pnpm run dev
+```
+
+## Noir Local Proving Setup
+
+When using local (in-browser) proving with Noir blueprints, you need to initialize the Noir WASM modules.
+
+### Required Import
+
+```typescript
+import { initZkEmailSdk } from "@zk-email/sdk";
+import { initNoirWasm } from "@zk-email/sdk/initNoirWasm";
+```
+
+### Usage
+
+```typescript
+// Initialize NoirWasm before generating proof
+const noirWasm = await initNoirWasm();
+
+// Pass noirWasm to generateProof
+const proof = await prover.generateProof(emailContent, [], { noirWasm });
 ```
 
 ## Additional Notes

@@ -1,9 +1,10 @@
-import zkeSdk from "@zk-email/sdk";
+import { initZkEmailSdk } from "@zk-email/sdk";
+import { initNoirWasm } from "@zk-email/sdk/initNoirWasm";
 
-const blueprintSlug = "DimiDumo/SuccinctZKResidencyInvite@v3";
+const blueprintSlug = "rutefig/gmail@v2";
 
 export function setupEmailValidator(element: HTMLElement) {
-  const sdk = zkeSdk();
+  const sdk = initZkEmailSdk();
   let emailContent = "";
 
   const handleFileUpload = async (event: Event) => {
@@ -28,11 +29,14 @@ export function setupEmailValidator(element: HTMLElement) {
       // Fetch blueprint
       const blueprint = await sdk.getBlueprint(blueprintSlug);
 
+      // Initialize NoirWasm (required for local proving)
+      const noirWasm = await initNoirWasm();
+
       // Initialize local prover
       const prover = blueprint.createProver({ isLocal: true });
 
-      // Create proof passing email content
-      const proof = await prover.generateProof(emailContent);
+      // Create proof passing email content and noirWasm
+      const proof = await prover.generateProof(emailContent, [], { noirWasm });
 
       console.log("Got proof: ", proof);
 

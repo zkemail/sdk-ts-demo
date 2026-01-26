@@ -2,7 +2,10 @@ import fs from "fs/promises";
 import { initZkEmailSdk, ProofStatus } from "@zk-email/sdk";
 
 // Copy slug from UI homepage
-const blueprintSlug = "DimiDumo/SuccinctZKResidencyInvite@v3";
+const blueprintSlug = "rutefig/gmail@v2";
+
+// Add the path to your eml file here
+const filePath = "";
 
 async function main() {
   const sdk = initZkEmailSdk();
@@ -14,7 +17,7 @@ async function main() {
   const prover = blueprint.createProver();
 
   // Get eml
-  const eml = (await fs.readFile("../emls/residency.eml")).toString();
+  const eml = (await fs.readFile(filePath)).toString();
 
   // Generate a proof request and don't wait till it is done.
   const proof = await prover.generateProofRequest(eml);

@@ -2,11 +2,14 @@ import { initZkEmailSdk, parseEmail, testBlueprint } from "@zk-email/sdk";
 import fs from "fs/promises";
 
 // Copy slug from UI homepage
-const blueprintSlug = "DimiDumo/SuccinctZKResidencyInvite@v3";
+const blueprintSlug = "rutefig/gmail@v2";
+
+// Add the path to your eml file here
+const filePath = "";
 
 async function main() {
   // Get eml
-  const eml = (await fs.readFile("../emls/residency.eml")).toString();
+  const eml = (await fs.readFile(filePath)).toString();
 
   // Check if an email is valid - Use parsedEmail to get specific information
   try {
